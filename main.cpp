@@ -1,17 +1,13 @@
 #include <systemc.h>
 
-// Place Interface:
+#include "place.h"
+#include "transition.h"
+#include "subnet.h"
+
+// Toplevel:
 // TODO
 
-// Place Channel:
-// TODO
-
-// Transition:
-// TODO
-
-// TOPLEVEL
-
-int sc_main(int argc, char* argv[])
+int sc_main(int, char**)
 {
     // TODO
 
