@@ -8,17 +8,27 @@
 // TODO
 SC_MODULE(toplevel) {
     private:
-    TRANSITION t1;
-    TRANSITION t2;
+    TRANSITION<1,2> t1;
+    TRANSITION<2,1> t2;
+    TRANSITION<1,1> t3;
     place<unsigned int> place1;
     place<unsigned int> place2;
+    place<unsigned int> place3;
+    place<unsigned int> place4;
 
     public:
-    SC_CTOR(toplevel) : t1("t1"), t2("t2"), place1(1), place2(0) {
+    SC_CTOR(toplevel) : t1("t1"), t2("t2"), t3("t3"), place1(1), place2(0), place3(0), place4(0) {
         t1.in.bind(place1);
         t1.out.bind(place2);
+        t1.out.bind(place3);
+
         t2.in.bind(place2);
+        t2.in.bind(place4);
         t2.out.bind(place1);
+        
+        t3.in.bind(place3);
+        t3.out.bind(place4);
+
         SC_THREAD(process);
     }
 
@@ -27,7 +37,9 @@ SC_MODULE(toplevel) {
             wait(10, SC_NS);
             t1.fire();
             wait(10, SC_NS);
-            t1.fire();
+            t2.fire();
+            wait(10, SC_NS);
+            t3.fire();
             wait(10, SC_NS);
             t2.fire();
             sc_stop();

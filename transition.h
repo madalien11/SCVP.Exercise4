@@ -7,21 +7,37 @@
 
 // Transition:
 // TODO
+template<unsigned int N = 1, unsigned int M = 1>
 SC_MODULE(TRANSITION) {
-    sc_port< placeInterface<unsigned int> > in;
-    sc_port< placeInterface<unsigned int> > out;
-
+    public:
+    sc_port<placeInterface<unsigned int>, N, SC_ALL_BOUND> in;
+    sc_port<placeInterface<unsigned int>, M, SC_ALL_BOUND> out;
+    
     SC_CTOR(TRANSITION) {}
 
     void fire() {
-        unsigned int tokens = in->testTokens();
-        if(tokens > 0) {
+        bool haveTokens = true;
+        for (int i = 0; i < N; i++) {
+            if(in[i]->testTokens() == 0) {
+                haveTokens = false;
+                break;
+            }
+        }
+
+        if(haveTokens) {
+            for (int i = 0; i < N; i++) {
+                in[i]->removeTokens(1);
+            }
+            
+            for (int i = 0; i < M; i++) {
+                out[i]->addTokens(1);
+            }
+
             std::cout << this->name() << ": Fired" << std::endl;
-            in->removeTokens(1);
-            out->addTokens(1);
-        } else if (tokens == 0) {
+        } else {
             std::cout << this->name() << ": NOT Fired" << std::endl;
         }
+        
     }
 };
 
