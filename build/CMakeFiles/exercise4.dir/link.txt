@@ -1,0 +1,1 @@
+/opt/Homebrew/bin/g++-11 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -mmacosx-version-min=13.6 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/exercise4.dir/main.cpp.o -o exercise4  /opt/systemc/lib-macosxarm/libsystemc.dylib 

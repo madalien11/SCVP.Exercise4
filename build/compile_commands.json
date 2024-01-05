@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/madikarsybekov/Desktop/RPTU/SystemC/my/SCVP.Exercise4/build",
+  "command": "/opt/Homebrew/bin/g++-11  -I/opt/systemc/include -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -mmacosx-version-min=13.6 -o CMakeFiles/exercise4.dir/main.cpp.o -c /Users/madikarsybekov/Desktop/RPTU/SystemC/my/SCVP.Exercise4/main.cpp",
+  "file": "/Users/madikarsybekov/Desktop/RPTU/SystemC/my/SCVP.Exercise4/main.cpp",
+  "output": "CMakeFiles/exercise4.dir/main.cpp.o"
+}
+]
