@@ -11,10 +11,10 @@ SC_MODULE(toplevel) {
     TRANSITION<1,2> t1;
     TRANSITION<2,1> t2;
     TRANSITION<1,1> t3;
-    place<unsigned int> place1;
-    place<unsigned int> place2;
-    place<unsigned int> place3;
-    place<unsigned int> place4;
+    place<1,1> place1;
+    place<1,1> place2;
+    place<1,1> place3;
+    place<1,1> place4;
 
     public:
     SC_CTOR(toplevel) : t1("t1"), t2("t2"), t3("t3"), place1(1), place2(0), place3(0), place4(0) {
