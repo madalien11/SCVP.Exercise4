@@ -8,26 +8,26 @@
 // TODO
 SC_MODULE(toplevel) {
     private:
-    TRANSITION<1,2> t1;
-    TRANSITION<2,1> t2;
-    TRANSITION<1,1> t3;
-    place<1,1> place1;
-    place<1,1> place2;
-    place<1,1> place3;
-    place<1,1> place4;
+    TRANSITION<1,1> ACT;
+    TRANSITION<1,1> RD;
+    TRANSITION<1,1> PRE;
+    TRANSITION<1,1> WR;
+    place<1,1> IDLE;
+    place<1,1> ACTIVE;
 
     public:
-    SC_CTOR(toplevel) : t1("t1"), t2("t2"), t3("t3"), place1(1), place2(0), place3(0), place4(0) {
-        t1.in.bind(place1);
-        t1.out.bind(place2);
-        t1.out.bind(place3);
+    SC_CTOR(toplevel) : ACT("ACT"), RD("RD"), PRE("PRE"), WR("WR"), IDLE(1), ACTIVE(0){
+        ACT.in.bind(IDLE);
+        ACT.out.bind(ACTIVE);
 
-        t2.in.bind(place2);
-        t2.in.bind(place4);
-        t2.out.bind(place1);
+        RD.in.bind(ACTIVE);
+        RD.out.bind(ACTIVE);
         
-        t3.in.bind(place3);
-        t3.out.bind(place4);
+        PRE.in.bind(ACTIVE);
+        PRE.out.bind(IDLE);
+        
+        WR.in.bind(ACTIVE);
+        WR.out.bind(ACTIVE);
 
         SC_THREAD(process);
     }
@@ -35,13 +35,17 @@ SC_MODULE(toplevel) {
     void process() {
         while (true) {
             wait(10, SC_NS);
-            t1.fire();
+            ACT.fire();
             wait(10, SC_NS);
-            t2.fire();
+            ACT.fire();
             wait(10, SC_NS);
-            t3.fire();
+            RD.fire();
             wait(10, SC_NS);
-            t2.fire();
+            WR.fire();
+            wait(10, SC_NS);
+            PRE.fire();
+            wait(10, SC_NS);
+            ACT.fire();
             sc_stop();
         }
     }
